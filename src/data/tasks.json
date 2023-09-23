@@ -1,0 +1,14 @@
+[
+    {
+        "task_name": "Create Node js API",
+        "is_completed": false,
+        "id": 1,
+        "description": "Create CRUD Operation endpoints"            
+    },
+    {
+        "task_name": "Solve 3 DSA problems",
+        "is_completed": true,
+        "id": 2,
+        "description": "Solve two sums, Sliding window and Array Problems"        
+    }        
+]
