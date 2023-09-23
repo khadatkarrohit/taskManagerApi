@@ -5,11 +5,12 @@ API Endpoints
 
 | Methods     | Urls             |Description            |
 | ----------- | -----------      | -----------        |
-| GET         | /tasks    | Retrieve all tasks.           |
-| GET         | /tasks/:id | Retrieve a single task by its ID         |
-| POST        | /tasks    |Create a new task         |
-| PUT        | /tasks/:id    | Update an existing task by its ID |
-| DELETE        | /tasks/:id    |Delete a task by its ID |
+| GET         | api/tasks        | Retrieve all tasks.           |
+| GET         | api/tasks/:id    | Retrieve a single task by its ID         |
+| POST        | api/tasks        |Create a new task         |
+| PUT         | api/tasks/:id    | Update an existing task by its ID |
+| DELETE      | api/tasks/:id    |Delete a task by its ID |
+| GET         | api/tasks?sort=created_at&orderby=desc    |Sort Array data by created_date as ASC or DESC |
 
 ## Quick Start
 

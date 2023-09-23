@@ -1,17 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const tasks = require('../data/tasks.json');
+const moment = require('moment');
 
 /* Get all tasks */
 router.get('/',  (req, res, next) => {
-  try {
-    res.status(200).send(tasks);
+  try { 
+
+    // This if will work without query param
+    // URL: localhost:8080/api/tasks
+    if (Object.keys(req.query).length == 0) {
+        res.status(200).send(tasks);        
+    }
+
+    // This will work with query param for sort
+    // URL: localhost:8080/api/tasks?sort=created_at&orderby=desc
+    let orderby = req.query.orderby;
+    let sort = req.query.sort;
+    const sortObject = {};
+    sortObject['sort'] = orderby === 'asc' ? 1 : -1;    
+    if (sortObject.sort == 1) {
+        tasks.sort((a, b) => moment(a.created_at).diff(moment(b.created_at)));        
+    } else {
+        tasks.sort((a, b) => moment(b.created_at).diff(moment(a.created_at)));        
+    }    
+    console.log(tasks);
+    res.status(200).send(tasks); 
   } catch (error) {
     next(error);
   }
 });
 
-/* Get a single task by its ID */
+/* 
+ Get a single task by its ID
+ URL: localhost:8080/api/tasks/1
+*/
+
 router.get('/:id',  (req, res, next) => {
   try {
     const { id } = req.params;
@@ -28,7 +52,11 @@ router.get('/:id',  (req, res, next) => {
   }
 });
 
-/* Delete a task by its ID */
+/* 
+ Delete a task by its ID
+ URL: localhost:8080/api/tasks/1
+ */
+
 router.delete('/:id',  (req, res, next) => {
   try {
     const { id } = req.params;
@@ -40,7 +68,15 @@ router.delete('/:id',  (req, res, next) => {
   }
 });
 
-/* Create a new task */
+/* 
+Create a new task
+URL: localhost:8080/api/tasks
+{
+ "task_name": "Create Java API",       
+ "description": "Create Java Crud Operation"            
+}
+ */
+
 router.post('/',  (req, res, next) => {
     try {
       const { task_name, description } = req.body; 
@@ -61,7 +97,8 @@ router.post('/',  (req, res, next) => {
         "task_name": task_name,
         "is_completed": false,
         "id": new_id,
-        "description": description
+        "description": description,
+        "created_at": moment().format() 
       }
 
       tasks.push(insert_obj);
@@ -72,7 +109,15 @@ router.post('/',  (req, res, next) => {
     }
   });
 
-/* Update an existing task by its ID */
+/* 
+Update an existing task by its ID
+URL: localhost:8080/api/tasks/1
+{
+ "task_name": "Create Java API",       
+ "description": "Create Java Crud Operation"            
+}
+ */
+
 router.put('/:id',  (req, res, next) => {
     try {
         const { id } = req.params;
