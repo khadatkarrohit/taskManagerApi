@@ -72,4 +72,36 @@ router.post('/',  (req, res, next) => {
     }
   });
 
+/* Update an existing task by its ID */
+router.put('/:id',  (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { task_name, description } = req.body;
+  
+        if ((task_name ==  "" | null | undefined) || (description == "" | null | undefined)) {        
+          return res.status(400).send('Please check task name or description for updation');
+        } 
+        
+        const tasks_found =  tasks.filter(val => val.task_name == task_name);
+        
+        if (tasks_found.length > 0) {        
+          return res.status(200).send('Task name already available !!! You Cannot update. Change the task name.');
+        } 
+  
+        const tasks_id_found =  tasks.filter(val => val.id == id);
+
+        if (!tasks_id_found) {
+            const error = new Error('There is no task found for provided ID');
+            return res.status(404).send(error);
+        }
+
+        tasks_id_found[0].task_name = task_name;
+        tasks_id_found[0].description = description;
+  
+        res.status(200).send('Property is get updated.');
+    } catch (error) {
+      next(error);
+    }
+  });
+
 module.exports = router;
