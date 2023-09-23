@@ -40,4 +40,36 @@ router.delete('/:id',  (req, res, next) => {
   }
 });
 
+/* Create a new task */
+router.post('/',  (req, res, next) => {
+    try {
+      const { task_name, description } = req.body; 
+
+      if ((task_name ==  "" | null | undefined) || (description == "" | null | undefined)) {        
+        return res.status(400).send('Please check task name or description');
+      }
+
+      const tasks_found =  tasks.filter(val => val.task_name == task_name);
+      
+      if (tasks_found.length > 0) {        
+        return res.status(200).send('Task name already available !!! Kindly add new task.');
+      }
+
+      let curr_max_id = Math.max.apply(null, tasks.map(itr => itr.id));
+      let new_id = curr_max_id + 1; // Auto Increment ID
+      const insert_obj = {
+        "task_name": task_name,
+        "is_completed": false,
+        "id": new_id,
+        "description": description
+      }
+
+      tasks.push(insert_obj);
+
+      res.status(200).send('New task Successfully Get added.');
+    } catch (error) {
+      next(error);
+    }
+  });
+
 module.exports = router;
