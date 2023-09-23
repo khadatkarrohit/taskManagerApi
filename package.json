@@ -1,0 +1,26 @@
+{
+  "name": "taskmanagerapi",
+  "version": "1.0.0",
+  "description": "In this project, we will create a RESTful API using Node.js, Express.js, and NPM packages. The API will allow users to perform CRUD operations (Create, Read, Update, and Delete) on tasks. The tasks should have a title, description, and a flag for completion status.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khadatkarrohit/taskManagerApi.git"
+  },
+  "author": "Rohit Khadatkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khadatkarrohit/taskManagerApi/issues"
+  },
+  "homepage": "https://github.com/khadatkarrohit/taskManagerApi#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}
