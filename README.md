@@ -11,6 +11,7 @@ API Endpoints
 | 4         | PUT         | api/tasks/:id    | Update an existing task by its ID |
 | 5         | DELETE      | api/tasks/:id    |Delete a task by its ID |
 | 6         | GET         | api/tasks?sort=created_at&orderby=desc    |Sort Array data by created_date as ASC or DESC |
+| 7         | GET         | api/tasks/priority/:level    | Retrieve tasks based on priority level |
 
 ## Quick Start
 

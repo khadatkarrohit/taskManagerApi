@@ -4,20 +4,39 @@
         "is_completed": false,
         "id": 1,
         "description": "Create CRUD Operation endpoints",
-        "created_at": "2023-09-24T03:08:24+05:30"            
+        "created_at": "2023-09-24T03:08:24+05:30",
+        "priority_level": "high"             
     },
     {
         "task_name": "Solve 3 DSA problems",
         "is_completed": true,
         "id": 2,
         "description": "Solve two sums, Sliding window and Array Problems",
-        "created_at": "2023-08-22T02:08:24+05:30"    
+        "created_at": "2023-08-22T02:08:24+05:30",
+        "priority_level": "low"    
     },
     {
         "task_name": "Learn MySql",
         "is_completed": true,
         "id": 3,
         "description": "Learn joins syntax",
-        "created_at": "2022-05-18T15:09:24+05:30"    
+        "created_at": "2022-05-18T15:09:24+05:30",
+        "priority_level": "medium"   
+    },
+    {
+        "task_name": "Learn Oracle DB",
+        "is_completed": false,
+        "id": 4,
+        "description": "Learn stored procedure",
+        "created_at": "2023-01-18T06:09:24+05:30",
+        "priority_level": "low"   
+    },
+    {
+        "task_name": "Learn Mongo DB",
+        "is_completed": false,
+        "id": 5,
+        "description": "Learn sharding and clustering",
+        "created_at": "2023-02-16T08:09:24+05:30",
+        "priority_level": "medium"   
     }        
 ]

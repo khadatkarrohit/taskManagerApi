@@ -71,15 +71,17 @@ router.delete('/:id',  (req, res, next) => {
 /* 
 Create a new task
 URL: localhost:8080/api/tasks
+body: 
 {
- "task_name": "Create Java API",       
- "description": "Create Java Crud Operation"            
+    "task_name": "Create Java API",       
+    "description": "Create Java Crud Operation",
+    "priority_level": "high"                   
 }
  */
 
 router.post('/',  (req, res, next) => {
     try {
-      const { task_name, description } = req.body; 
+      const { task_name, description, priority_level } = req.body; 
 
       if ((task_name ==  "" | null | undefined) || (description == "" | null | undefined)) {        
         return res.status(400).send('Please check task name or description');
@@ -98,6 +100,7 @@ router.post('/',  (req, res, next) => {
         "is_completed": false,
         "id": new_id,
         "description": description,
+        "priority_level": priority_level,
         "created_at": moment().format() 
       }
 
@@ -112,16 +115,18 @@ router.post('/',  (req, res, next) => {
 /* 
 Update an existing task by its ID
 URL: localhost:8080/api/tasks/1
+body: 
 {
- "task_name": "Create Java API",       
- "description": "Create Java Crud Operation"            
+    "task_name": "Create Java API",       
+    "description": "Create Java Crud Operation",
+    "priority_level": "high"                   
 }
  */
 
 router.put('/:id',  (req, res, next) => {
     try {
         const { id } = req.params;
-        const { task_name, description } = req.body;
+        const { task_name, description, priority_level } = req.body;
   
         if ((task_name ==  "" | null | undefined) || (description == "" | null | undefined)) {        
           return res.status(400).send('Please check task name or description for updation');
@@ -142,8 +147,29 @@ router.put('/:id',  (req, res, next) => {
 
         tasks_id_found[0].task_name = task_name;
         tasks_id_found[0].description = description;
+        tasks_id_found[0].priority_level = priority_level;
   
         res.status(200).send('Property is get updated.');
+    } catch (error) {
+      next(error);
+    }
+  });
+
+
+  /* 
+ Get a tasks based on priority level
+ URL: localhost:8080/api/tasks/priority/high
+*/
+
+router.get('/priority/:level',  (req, res, next) => {
+    try {
+      const priority_level  = req.params;            
+      const tasks_found =  tasks.filter(val => val.priority_level == priority_level.level);        
+      if (!tasks_found) {
+        const error = new Error('There is no task found for provided priority level');
+        return res.status(404).send(error);
+      }  
+      return res.status(200).json(tasks_found);
     } catch (error) {
       next(error);
     }
